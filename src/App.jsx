@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow } from "@vis.gl/react-google-maps";
 import { useState } from "react";
+import {BrowserRouter as Router, Route, Routes, Link, Outlet} from "react-router-dom";
 
 function App() {
   const tasks = useQuery(api.tasks.get);
@@ -21,12 +22,20 @@ function App() {
     <div className="App">
       <header>
         <h1>DeSharp</h1>
+
         <h3>
           Report any needles you've spotted in Vancouver and We'll send our folks to clean them
           up!
         </h3>
       </header>
-
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/form" element={<Form />} />
+          </Route>
+        </Routes>
+      </Router>
+      
       <APIProvider apiKey={googleMapsApiKey}>
         <div style={{ height: "100vh", width: "100%" }}>
           <Map zoom={9} center={position} mapId={googleMapsId}>
@@ -54,4 +63,27 @@ function App() {
   );
 }
 
+function Layout() {
+  return (
+    <div>
+      {/* A "layout route" is a good place to put markup you want to
+          share across all the pages on your site, like navigation. */}
+      <nav>
+        <ul>
+          <li>
+            <Link to="/form">Add a Pin</Link>
+          </li>
+          
+        </ul>
+      </nav>
+
+      <hr />
+
+      {/* An <Outlet> renders whatever child route is currently active,
+          so you can think about this <Outlet> as a placeholder for
+          the child routes we defined above. */}
+      <Outlet />
+    </div>
+  );
+}
 export default App;
