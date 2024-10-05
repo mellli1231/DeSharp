@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  service1:
+    image: service1
+    build:
+      context: DeSharp
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
