@@ -6,6 +6,7 @@ function App() {
   const tasks = useQuery(api.tasks.get);
   return (
     <div className="App">
+      <h1>DeSharp</h1>
       {tasks?.map(({ _id, text }) => (
         <div key={_id}>{text}</div>
       ))}
