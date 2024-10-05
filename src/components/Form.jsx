@@ -10,40 +10,46 @@ const Form = () => {
     const [photo, setPhoto] = useState('');
 
     const addEntry = useMutation(api.myFunctions.createTask);
-    const handleSubmit = async (e) => {
 
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        [latitude, longitude] = userLocation;
-        await addEntry({ latitude, longitude, photo, name });
+
+        // Get the user's location before proceeding
+        const location = await getUserLocation();
+        if (!location) {
+            alert("Could not get location");
+            return;
+        }
+
+        const { latitude, longitude } = location;
+        await addEntry({ latitude, longitude, photo, name, comment });
 
         setName("");
         setComment("");
         alert("Form Submitted");
-    }
+    };
 
-    // define the function that finds the users geolocation
+    // Define the function that finds the user's geolocation
     const getUserLocation = () => {
-      // if geolocation is supported by the users browser
-      if (navigator.geolocation) {
-  
-        // get the current users location
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            // save the geolocation coordinates in two variables
-            const { latitude, longitude } = position.coords;
-            // update the value of userlocation variable
-            setUserLocation({ latitude, longitude });
-          },
-          // if there was an error getting the users location
-          (error) => {
-            console.error('Error getting user location:', error);
-          }
-        );
-      }
-      // if geolocation is not supported by the users browser
-      else {
-        console.error('Geolocation is not supported by this browser.');
-      }
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        setUserLocation({ latitude, longitude });
+                        resolve({ latitude, longitude });
+                    },
+                    (error) => {
+                        console.error('Error getting user location:', error);
+                        reject(null);
+                    }
+                );
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+                reject(null);
+            }
+        });
     };
 
     return (
