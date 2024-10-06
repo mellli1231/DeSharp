@@ -29,14 +29,20 @@ function Home() {
       <Header />
 
       <section className="form-link">
-
+        <div className="intro">
+          <p>Over recent years, Vancouver has experienced a sharp increase in substance abuse,
+          leading to a drug epidemic. Many have found the streets unsafe due to the presence of needles.
+          We have partnered with some company to help clean the streets. There is no one better to help locate these 
+          needles than those that walk on the streets. With your help, we wll be able to restore a clean and safe 
+          environment for our city
+        </p>
+        </div>
+        
         <h3>
           Report any needles you've spotted in Vancouver and we'll send our folks to clean them
           up!
         </h3>
-        <h3>
-          Find another needle not on this map?{" "}
-        </h3>
+
       </section>
 
       <section className="map-container">
@@ -65,9 +71,11 @@ function Home() {
 
     <section>
 
+        <h3>
+          Find another needle not on this map?{" "}
+        </h3>
       <h3 className="form">Help us DeSharp the city!</h3>
     </section>
-
     </>
   );
 };
