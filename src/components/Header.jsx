@@ -5,8 +5,10 @@ const Header = () => {
     return (
         <header id="header">
             <h2>DeSharp</h2>
-            {/* <Link to="../Admin.jsx">ADMIN</Link> */}
-            <a>admin</a>
+            <div className="header_nav">
+                <Link style={{ textDecoration: "none" }} to="/home">Home</Link>
+                <Link style={{ textDecoration: "none" }} to="/admin">Admin</Link>
+            </div>
         </header>
     )
 }

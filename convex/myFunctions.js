@@ -1,5 +1,6 @@
 import { mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { query } from "../convex/_generated/server";
 
 export const generateUploadUrl = mutation(async (ctx) => {
   return await ctx.storage.generateUploadUrl();
@@ -23,7 +24,26 @@ export const createTask = mutation({
         user_name: args.user_name, 
         comment: args.comment 
       });
-    console.log(args.latitude, args.longitude);
+
+      // Now that the task is created, get the URL for the uploaded photo
+    const photoURL = await ctx.storage.getUrl(args.storageId);
+
+    // Update the task with the photoURL
+    await ctx.db.patch(newTaskId, { photoURL });
+
     return newTaskId;
   },
 });
+
+export const deleteTask = mutation({
+  args: {
+    _id: v.id("tasks"),
+    photo: v.id("_storage"),
+  },
+
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args._id);
+    await ctx.storage.delete(args.photo);
+  }
+});
+

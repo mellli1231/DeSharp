@@ -71,20 +71,22 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form">
+        <p>Name</p>
         <input
               type="text"
-              placeholder="Enter your name"
+              placeholder="John Doe"
               onChange={(e) => setUserName(e.target.value)}
               value={user_name}
               required
           />
-
+        <p>Description</p>
           <textarea
-              placeholder="Enter your comment"
+              placeholder="ex. Needle found in location..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               required
           />
+          <p>Submit a Photo of Needle</p>
           <input
               type="file"
               accept="image/*"
