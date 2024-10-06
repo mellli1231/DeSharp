@@ -22,15 +22,32 @@ textarea {
 }
 
 .form button[type="submit"] {
-    width: 100%;
+    width: 75%;
     padding:10px;
-    background-color:#15253f;
+    font-size: 18px;
+    background-color:#1e5431;
     color: white;
     font-size: 16x;
     border-radius: 8px;
 }
 
 .form button[type="submit"]:hover {
-    background-color: #2b3d5b;
+    background-color: #3c6249;
+}
+.form input[type="file"] {
+    font-size: 16px;
+    margin-bottom: 24px;
+    color: black;
+
 }
 
+input[type="file"]::file-selector-button {
+    background-color: #1e5431;
+    color: white;
+    border-radius: 16px;
+    padding: 12px;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #3c6249;
+}
