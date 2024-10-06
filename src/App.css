@@ -1,18 +1,24 @@
 h1{
   text-align: center;
   padding-top: 25px;
-  font-size: 3.2em;
+  font-size: 5.2em;
   line-height: 1.1;
+}
+h2{
+  text-align: center;
+  font-size: 2.2em;
 }
 h3{
   text-align: center;
   padding-bottom: 25px;
-  font-size: 1.2em;
+  font-size: 2.2em;
   line-height: 1.1;
 }
 header{
   color: #cc7d51;
   background-color: rgba(43,61,91,1);
+  border: #15253f;
+  border-radius: 15px;
 }
 
 a:hover{
@@ -27,7 +33,11 @@ section{
   background-color: #Bd9060;
 }
 body{
-  background-color: #e0c0ab;
+  background-color: #516086;
+}
+
+nav{
+  font-size: larger;
 }
 
 .form-link{

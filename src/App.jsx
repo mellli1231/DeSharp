@@ -24,7 +24,7 @@ function App() {
   const [viewState, setViewState] = useState({
     longitude: -123,
     latitude: 49,
-    zoom: 13.5
+    zoom: 11
   });
 
   return (
@@ -38,18 +38,13 @@ function App() {
         </h3>
       </header>
 
-      <section className="form-link">
-        <h2>
-          Find another needle not on this map?{" "}
-        </h2>
-      </section>
 
       <section className="map-container">
         <APIProvider apiKey={googleMapsApiKey}>
-          <div style={{ height: "90vh", width: "60%" }}>
+          <div style={{ height: "90vh", width: "60"}}>
             <Map
-              defaultCenter={position}
-              defaultZoom={13}
+              defaultCenter={{lat:49.242532, lng:-123.007856}}
+              defaultZoom={6}
               mapId={googleMapsId}
               {...viewState}
               onMove={evt => setViewState(evt.viewState)}
@@ -66,6 +61,11 @@ function App() {
               
           </div>
         </APIProvider>
+      </section>
+      <section className="form-link">
+        <h2>
+          Find another needle not on this map?{" "}
+        </h2>
       </section>
         <div className="form">                
           <h2>Help us DeSharp the city!</h2>
