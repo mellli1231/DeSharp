@@ -4,8 +4,8 @@ import { v } from "convex/values";
 // Create a new task with the given text
 export const createTask = mutation({
   args: { 
-    latitude: v.float64(), 
-    longitude: v.float64(), 
+    latitude: v.number(), 
+    longitude: v.number(), 
     photo: v.string(), 
     user_name: v.string(), 
     comment: v.string() 
