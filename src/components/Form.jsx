@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 const Form = () => {
 
-    const [name, setName] = useState('');
+    const [user_name, setUserName] = useState('');
     const [comment, setComment] = useState('');
     const [userLocation, setUserLocation] = useState(null);
     const [photo, setPhoto] = useState('');
 
     const addEntry = useMutation(api.myFunctions.createTask);
-
+    const tasks = useQuery(api.tasks.get);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,9 +23,9 @@ const Form = () => {
         }
 
         const { latitude, longitude } = location;
-        await addEntry({ latitude, longitude, photo, name, comment });
-
-        setName("");
+        await addEntry({ latitude, longitude, photo, user_name, comment });
+        console.log(latitude, longitude, comment, user_name);
+        setUserName("");
         setComment("");
         alert("Form Submitted");
     };
@@ -57,8 +57,8 @@ const Form = () => {
             <input
                 type="text"
                 placeholder="Enter your name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
+                onChange={(e) => setUserName(e.target.value)}
+                value={user_name}
                 required
             />
 
@@ -69,6 +69,7 @@ const Form = () => {
                 required
             />
             <button type='submit'>Click to submit</button>
+           {/* {tasks && JSON.stringify(tasks)} */}
         </form>
     );
 

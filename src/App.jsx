@@ -1,21 +1,36 @@
 "use client";
 import "./App.css";
 import Form from "./components/Form.jsx"
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
-import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow} from "@vis.gl/react-google-maps"
+import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 import {BrowserRouter as Router, Route, Routes, Link, Outlet} from "react-router-dom";
 
+
 function App() {
   const tasks = useQuery(api.tasks.get);
-  const position = {lat:49.256104,lng: -123.113550}
-  const [open,setOpen] = useState(false);
+  const position = { lat: 49.282756, lng: -123.120774};
+  const position2 = { lat: 49.282142, lng: -123.121016 };
+  const [open, setOpen] = useState(false);
+
+  // Access environment variables using import.meta.env
+  const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+  const googleMapsId = import.meta.env.VITE_GOOGLE_MAPS_ID;
+
+  const addReport = useMutation(api.mutate.createTask);
+
+  const [viewState, setViewState] = useState({
+    longitude: -123,
+    latitude: 49,
+    zoom: 13.5
+  });
+  
 
   return (
-<<<<<<< HEAD
 
     <div className="App">
+      <Form></Form>
       <header>
         <h1>DeSharp</h1>
 
@@ -24,6 +39,7 @@ function App() {
           up!
         </h3>
       </header>
+
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -46,8 +62,40 @@ function App() {
           </Map>
         </div>
 
-        {/* Update the link to use React Router or appropriate navigation */}
-      </APIProvider>
+      <section className="form-link">
+        <h2>
+          Find another needle not on this map?{" "}
+          
+        </h2>
+      </section>
+
+      <section className="map-container">
+        <APIProvider apiKey={googleMapsApiKey}>
+          <div style={{height: "90vh", width: "60%" }}>
+            <Map
+              defaultCenter={position}
+              defaultZoom={13}
+              mapId={googleMapsId}
+              {...viewState}
+              onMove={evt => setViewState(evt.viewState)}
+              onZoomChanged={evt => setViewState(evt.viewState)}
+              >
+              <AdvancedMarker position={position} onClick={() => setOpen(true)}>
+              </AdvancedMarker>
+              
+              <AdvancedMarker position={position2} onClick={() => setOpen(true)}>
+              </AdvancedMarker>
+
+              {open && (
+                <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
+                  <p>Test</p>
+                </InfoWindow>
+              )}
+            </Map>
+          </div>
+        </APIProvider>
+      </section>
+
 
       {/* Add loading and error states for better UX */}
       {tasks ? (
@@ -56,6 +104,7 @@ function App() {
         <div>Loading tasks...</div>
       )}
     </div>
+
   );
 }
 
@@ -83,44 +132,3 @@ function Layout() {
   );
 }
 export default App;
-=======
-    <Form />
-    // <div className="App">
-    //   <body>
-    //     <header>
-    //       <h1>DeSharp</h1>
-    //       <h3>Report any needles you've spotted in Vancouver and We'll send our folks to clean them up!</h3>
-    //     </header>
-        
-    //     {/*
-    //     <APIProvider apiKey={process.env.GOOGLE_MAPS_API_KEY}>
-    //       <div style={{height: "100vh", width:"100%"}}>
-    //         <Map 
-    //           zoom={9} 
-    //           center={position} 
-    //           mapId={process.env.GOOGLE_MAPS_ID}
-    //         >
-    //         <AdvancedMarker position=[position] onClick={() => setOpen(true)}>
-    //           <Pin/>
-    //         </AdvancedMarker>
-    //         {open && (
-    //           <InfoWindow position={position} onCloseCLick={() => setOpen(false)}>
-    //             <p>Test</p>
-    //           </InfoWindow>
-    //         )}
-    //         </Map>
-    //       </div>
-           
-    //       <a href="form.jsx">Report a sighting</a>
-    //     </APIProvider>
-    //     */}
-    //     {tasks?.map(({ _id, text }) => (
-    //       <div key={_id}>{text}</div>
-    //     ))}
-    //   </body>
-    // </div>
-  );
-}
-
-export default App;
->>>>>>> 44a00aa00d73012c0ae5a9fc6df989bfcdc15f08
