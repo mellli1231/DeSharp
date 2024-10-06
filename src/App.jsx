@@ -6,6 +6,7 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
 import { useState } from "react";
+import {BrowserRouter as Router, Routes, Route, Link, Outlet} from "react-router-dom";
 // import { Link } from "react-router-dom"; // Import Link for navigation
 
 function App() {
@@ -64,13 +65,13 @@ function App() {
               )}
             </Map>
               <div className="form">
-              <Router>
-                <Routes>
-                  <Route path="/" element={<Layout />}>
-                    <Route path="/form" element={<Form />} />
-                  </Route>
-                </Routes>
-              </Router>
+                <Router>
+                  <Routes>
+                    <Route path="/" element={<Layout />}>
+                      <Route path="/form" element={<Form />} />
+                    </Route>
+                  </Routes>
+                </Router>
                 <h2>Help us DeSharp the city!</h2>
 
                 <Form></Form>
@@ -78,20 +79,6 @@ function App() {
           </div>
         </APIProvider>
       </section>
-
-      {/* Add loading and error states for better UX */}
-      {tasks ? (
-        tasks.map(({ _id, text }) => <div key={_id}>{text}</div>)
-      ) : (
-        <div>Loading tasks...</div>
-      )}
-
-      <div className="form">
-        
-        <h2>Help us DeSharp the city!</h2>
-
-        <Form></Form>
-      </div>
     </div>
 
     
