@@ -30,10 +30,7 @@ function App() {
   return (
 
     <div className="App">
-<<<<<<< Updated upstream
-=======
       {/* <Form></Form> */}
->>>>>>> Stashed changes
       <header>
         <h1>DeSharp</h1>
         <h3>
@@ -41,14 +38,6 @@ function App() {
           up!
         </h3>
       </header>
-
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/form" element={<Form />} />
-          </Route>
-        </Routes>
-      </Router>
 
       <section className="form-link">
         <h2>
@@ -98,11 +87,21 @@ function App() {
                 </InfoWindow>
               )}
             </Map>
+              <div className="form">
+              <Router>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    <Route path="/form" element={<Form />} />
+                  </Route>
+                </Routes>
+              </Router>
+                <h2>Help us DeSharp the city!</h2>
+
+                <Form></Form>
+              </div>
           </div>
         </APIProvider>
       </section>
-<<<<<<< Updated upstream
-=======
 
       {/* Add loading and error states for better UX */}
       {tasks ? (
@@ -112,11 +111,11 @@ function App() {
       )}
 
       <div className="form">
+        
         <h2>Help us DeSharp the city!</h2>
 
         <Form></Form>
       </div>
->>>>>>> Stashed changes
     </div>
 
     
