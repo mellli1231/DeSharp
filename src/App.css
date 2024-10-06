@@ -1,3 +1,27 @@
+h1{
+  text-align: center;
+  padding-top: 25px;
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+h3{
+  text-align: center;
+  padding-bottom: 25px;
+  font-size: 1.2em;
+  line-height: 1.1;
+}
+header{
+  color: #cc7d51;
+  background-color: rgba(43,61,91,1);
+}
+
+a:hover{
+  color: #617492;
+}
+a {
+  font-size: larger;
+  color: #15253f;
+}
 section{
   text-align: center;
   background-color: #Bd9060;

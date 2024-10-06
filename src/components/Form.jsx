@@ -93,10 +93,8 @@ const Form = () => {
               disabled={selectedImage !== null}
               required
           />
-          <p> </p>
-          
         <button type='submit'>Click to submit</button>
-        {/*{tasks && JSON.stringify(tasks)}*/}
+        {tasks && JSON.stringify(tasks)}
         </div>
     </form>
   );
