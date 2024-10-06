@@ -14,7 +14,7 @@ function App() {
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const googleMapsId = import.meta.env.VITE_GOOGLE_MAPS_ID;
 
-  const addReport = useMutation(api.mutate.createTask);
+  const addReport = useMutation(api.mutate.createTask); // add to database
   
   return (
 
@@ -22,7 +22,7 @@ function App() {
       <header>
         <h1>DeSharp</h1>
         <h3>
-          Report any needles you've spotted in Vancouver and We'll send our folks to clean them
+          Report any needles you've spotted in Vancouver and we'll send our folks to clean them
           up!
         </h3>
       </header>
