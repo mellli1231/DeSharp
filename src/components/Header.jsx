@@ -1,10 +1,12 @@
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
         <header id="header">
             <h2>DeSharp</h2>
-            <a>Admin</a>
+            {/* <Link to="../Admin.jsx">ADMIN</Link> */}
+            <a>admin</a>
         </header>
     )
 }

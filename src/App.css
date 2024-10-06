@@ -3,6 +3,7 @@ body{
   margin: 0;
   background-color: #C0C78C;
   line-height: 1.5;
+  color: rgb(24, 42, 8);
 }
 
 section{
@@ -10,8 +11,7 @@ section{
 }
 
 .form-link{
-  color: rgb(24, 42, 8);
-  margin: 10px;
+  margin: 50px;
 }
 
 .map-container {
@@ -29,6 +29,7 @@ section{
 
 .form {
   display: flex;
+  gap: 15px;
 }
 
 #header {
@@ -81,4 +82,5 @@ h3 {
 
 .form h3 {
   font-size: 24px;
+  margin-top: 50px;
 }
