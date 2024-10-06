@@ -35,7 +35,7 @@ section{
 
 .intro {
   display:flex;
-  background-image:url('./assets/sunset.webp');
+  background: linear-gradient(rgba(0, 0, 0, 0.29), rgba(0, 0, 0, 0.29)),url('./assets/van3.jpg');
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
@@ -43,14 +43,9 @@ section{
   align-items:center;
   position:relative;
   width:100%;
-  height:auto
+  height:80vh;
 }
 
-.intro .introText{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-}
 .introText p{
   background-color: rgba(255, 255, 255, 0.733);
   padding: 16px;
