@@ -46,9 +46,9 @@ section{
   align-items: center;
   background-color: #86AB89;
   margin: 0;
-  position: sticky;
-  top: 0;
-  z-index: 99;
+  /* position: sticky; */
+  /* top: 0; */
+  /* z-index: 99; */
   padding: 10px 20px;
 }
 

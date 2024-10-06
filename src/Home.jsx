@@ -1,12 +1,15 @@
 import "./App.css";
+import Form from "./components/Form.jsx";
 import PoiMarkers from "./components/PoiMarkers.jsx";
 import Header from "./components/Header.jsx";
+import Admin from "./Admin.jsx";
 import { useQuery } from "convex/react";
-import { api } from "../convex/_generated/api.js";
-import { APIProvider, Map, InfoWindow } from "@vis.gl/react-google-maps";
+import { api } from "../convex/_generated/api";
+import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link, Outlet, BrowserRouter } from "react-router-dom";
 
-function Admin() {
+function Home() {
   const locations = useQuery(api.tasks.get);
   const position = { lat: 49.282756, lng: -123.120774 };
   const [open, setOpen] = useState(false);
@@ -18,18 +21,30 @@ function Admin() {
   const [viewState, setViewState] = useState({
     longitude: -123,
     latitude: 49,
-    zoom: 13.5
+    zoom: 11
   });
 
   return (
     <>
-      <Header />  
+      <Header />
+
+      <section className="form-link">
+
+        <h3>
+          Report any needles you've spotted in Vancouver and we'll send our folks to clean them
+          up!
+        </h3>
+        <h3>
+          Find another needle not on this map?{" "}
+        </h3>
+      </section>
+
       <section className="map-container">
         <APIProvider apiKey={googleMapsApiKey}>
-          <div style={{ height: "90vh", width: "60%" }}>
+          <div className="map">
             <Map
-              defaultCenter={position}
-              defaultZoom={13}
+              defaultCenter={{ lat: 49.242532, lng: -123.007856 }}
+              defaultZoom={6}
               mapId={googleMapsId}
               {...viewState}
               onMove={evt => setViewState(evt.viewState)}
@@ -43,12 +58,18 @@ function Admin() {
                 </InfoWindow>
               )}
             </Map>
-              
+
           </div>
         </APIProvider>
       </section>
+
+    <section>
+
+      <h3 className="form">Help us DeSharp the city!</h3>
+    </section>
+
     </>
   );
 };
 
-export default Admin;
+export default Home;
