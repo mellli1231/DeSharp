@@ -1,13 +1,12 @@
-"use client";
 import "./App.css";
 import Form from "./components/Form.jsx";
 import PoiMarkers from "./components/PoiMarkers.jsx";
-import { useQuery, useMutation } from "convex/react";
+import Header from "./components/Header.jsx";
+import { useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 import {BrowserRouter as Router, Routes, Route, Link, Outlet} from "react-router-dom";
-// import { Link } from "react-router-dom"; // Import Link for navigation
 
 function App() {
   const locations = useQuery(api.tasks.get);
@@ -19,8 +18,6 @@ function App() {
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const googleMapsId = import.meta.env.VITE_GOOGLE_MAPS_ID;
 
-  const addReport = useMutation(api.mutate.createTask);
-
   const [viewState, setViewState] = useState({
     longitude: -123,
     latitude: 49,
@@ -28,20 +25,18 @@ function App() {
   });
 
   return (
+    <>
+      <Header />  
 
-    <div className="App">
-      <header>
-        <h1>DeSharp</h1>
+      <section className="form-link">
+       
         <h3>
           Report any needles you've spotted in Vancouver and we'll send our folks to clean them
           up!
         </h3>
-      </header>
-
-      <section className="form-link">
-        <h2>
+        <h3>
           Find another needle not on this map?{" "}
-        </h2>
+        </h3>
       </section>
 
       <section className="map-container">
@@ -77,7 +72,7 @@ function App() {
             </Routes>
           </Router>
         </div>
-    </div> 
+    </>
   );
 };
 
