@@ -78,13 +78,10 @@ function App() {
 
 function Layout() {
   return (
-    <div>
-      {}
+    <div className="form_link">
       <nav>
         <Link to="/form">Add a Pin</Link>
       </nav>
-      <hr />
-      {}
       <Outlet />
     </div>
   );
