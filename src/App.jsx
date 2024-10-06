@@ -64,24 +64,21 @@ function App() {
                 </InfoWindow>
               )}
             </Map>
-              <div className="form">
-                <Router>
-                  <Routes>
-                    <Route path="/" element={<Layout />}>
-                      <Route path="/form" element={<Form />} />
-                    </Route>
-                  </Routes>
-                </Router>
-                <h2>Help us DeSharp the city!</h2>
-
-                <Form></Form>
-              </div>
+              
           </div>
         </APIProvider>
       </section>
-    </div>
-
-    
+        <div className="form">                
+          <h2>Help us DeSharp the city!</h2>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route path="/form" element={<Form />} />
+              </Route>
+            </Routes>
+          </Router>
+        </div>
+    </div> 
   );
 };
 
@@ -90,11 +87,7 @@ function Layout() {
     <div>
       {}
       <nav>
-        <ul>
-          <li>
-            <Link to="/form">Add a Pin</Link>
-          </li>
-        </ul>
+        <Link to="/form">Add a Pin</Link>
       </nav>
       <hr />
       {}
