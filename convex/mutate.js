@@ -9,10 +9,11 @@ export const createTask = mutation({
     photo: v.string(), 
     user_name: v.string(), 
     comment: v.string() 
-},
+  },
 
   handler: async (ctx, args) => {
     const newTaskId = await ctx.db.insert("tasks", { lattitude: args.lattitude, longitude: args.longitude, photo: args.photo, user_name: args.user_name, comment: args.comment });
+    console.log(args.lattitude, args.longitude);
     return newTaskId;
   },
 });
