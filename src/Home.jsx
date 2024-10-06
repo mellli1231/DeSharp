@@ -72,10 +72,13 @@ function Home() {
         </APIProvider>
       </section>
 
-      <section>
-        <h3>Find another needle not on this map?{" "}</h3>
-        <h3 className="form">Help us DeSharp the city!</h3>
-      </section>
+    <section>
+        <h3>
+          Find another needle not on this map?{" "}
+        </h3>
+      <h3 className="form">Help us DeSharp the city!</h3>
+      <Form></Form>
+    </section>
     </>
   );
 }

@@ -10,9 +10,10 @@ function App() {
     <div>
       <Router>
               <Routes>
-                <Route index element={<Home />} />
+
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/admin" element={<Admin />} />
-                <Route path="/form" element={<Form />} />
               </Routes>
       </Router>
     </div>
