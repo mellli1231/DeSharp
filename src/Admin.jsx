@@ -6,6 +6,7 @@ import { api } from "../convex/_generated/api.js";
 import { APIProvider, Map, InfoWindow, Marker } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 
+
 function Admin() {
   const locations = useQuery(api.tasks.get);
   const [open, setOpen] = useState(false);
@@ -23,10 +24,12 @@ function Admin() {
   });
 
   const deleteEntry = useMutation(api.myFunctions.deleteTask);
+  
+ 
 
-  const handleRightClick = async (locationId) => {
+  const handleRightClick = async (locationId, photo) => {
     try {
-      await deleteEntry({ _id: locationId });
+      await deleteEntry({ _id: locationId, photo});
       setOpen(false);
     }
     catch (error) {
@@ -43,9 +46,9 @@ function Admin() {
   return (
     <>
       <Header />
-      <section className="map-container">
+      <section className="map-admin">
         <APIProvider apiKey={googleMapsApiKey}>
-          <div style={{ height: "90vh", width: "60%" }}>
+          <div className="map" style={{ height: "90vh", width: "60%" }}>
             <Map
 
               defaultCenter={{ lat: 49.242532, lng: -123.007856 }}
@@ -67,17 +70,11 @@ function Admin() {
                   onCloseClick={() => setOpen(false)}  // Close the InfoWindow when clicked
                 >
                   <div>
-                    <p><strong>ID:</strong> {clickedPOI._id}</p>
+                    <img src={clickedPOI.photoURL} alt={`Submitted by ${clickedPOI.user_name}`} height="100px" width="auto" />
                     <p><strong>Submitted by:</strong> {clickedPOI.user_name}</p>
                     <p><strong>Comment:</strong> {clickedPOI.comment}</p>
-                    <button onClick={() => handleRightClick(clickedPOI._id)}>Delete</button>
-                    {clickedPOI.imageInput && (
-                      <img
-                        src={clickedPOI.imageInput}
-                        alt={`Submitted by ${clickedPOI.user_name}`}
-                        style={{ width: "100px", height: "100px" }}
-                      />
-                    )}
+                    <button onClick={() => handleRightClick(clickedPOI._id, clickedPOI.photo)}>Delete</button>
+                    
                   </div>
                 </InfoWindow>
               )}

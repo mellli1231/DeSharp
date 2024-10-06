@@ -8,14 +8,14 @@ const PoiMarkers = ({ pois, onMarkerClick }) => {
 
   return (
     <>
-      {pois.map(({ _id, latitude, longitude, user_name, imageInput, comment }) => {
+      {pois.map(({ _id, latitude, longitude, user_name, photo, photoURL, comment }) => {
         const position = { lat: latitude, lng: longitude };
 
         return (
           <AdvancedMarker
             key={_id}
             position={position}
-            onClick={() => onMarkerClick({ _id, latitude, longitude, user_name, imageInput, comment })}  // Pass the entire POI data
+            onClick={() => onMarkerClick({ _id, latitude, longitude, user_name, photo, photoURL, comment})}  // Pass the entire POI data
           />
         );
       })}

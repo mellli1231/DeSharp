@@ -14,10 +14,14 @@ section{
   margin: 50px;
 }
 
-.map-container {
+.map-container, .map_admin{
   display: flex;
   justify-content: center; 
   align-items: center;     
+}
+
+.map_admin {
+  text-align: center;
 }
 
 .map {
