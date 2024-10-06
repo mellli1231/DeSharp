@@ -30,9 +30,12 @@ function App() {
   return (
 
     <div className="App">
+<<<<<<< Updated upstream
+=======
+      {/* <Form></Form> */}
+>>>>>>> Stashed changes
       <header>
         <h1>DeSharp</h1>
-
         <h3>
           Report any needles you've spotted in Vancouver and We'll send our folks to clean them
           up!
@@ -50,7 +53,6 @@ function App() {
       <section className="form-link">
         <h2>
           Find another needle not on this map?{" "}
-          
         </h2>
       </section>
 
@@ -99,30 +101,41 @@ function App() {
           </div>
         </APIProvider>
       </section>
+<<<<<<< Updated upstream
+=======
+
+      {/* Add loading and error states for better UX */}
+      {tasks ? (
+        tasks.map(({ _id, text }) => <div key={_id}>{text}</div>)
+      ) : (
+        <div>Loading tasks...</div>
+      )}
+
+      <div className="form">
+        <h2>Help us DeSharp the city!</h2>
+
+        <Form></Form>
+      </div>
+>>>>>>> Stashed changes
     </div>
 
+    
   );
-}
+};
 
 function Layout() {
   return (
     <div>
-      {/* A "layout route" is a good place to put markup you want to
-          share across all the pages on your site, like navigation. */}
+      {}
       <nav>
         <ul>
           <li>
             <Link to="/form">Add a Pin</Link>
           </li>
-          
         </ul>
       </nav>
-
       <hr />
-
-      {/* An <Outlet> renders whatever child route is currently active,
-          so you can think about this <Outlet> as a placeholder for
-          the child routes we defined above. */}
+      {}
       <Outlet />
     </div>
   );
