@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useMutation, useQuery } from "convex/react";
+import { useNavigate } from 'react-router-dom';
 import { api } from "../../convex/_generated/api";
+import "./form.css";
 
 const Form = () => {
-
     const [user_name, setUserName] = useState('');
     const [comment, setComment] = useState('');
     const [userLocation, setUserLocation] = useState(null);
-    const [photo, setPhoto] = useState('');
-
+    const navigate = useNavigate();
+    const generateUploadUrl = useMutation(api.myFunctions.generateUploadUrl);
     const addEntry = useMutation(api.myFunctions.createTask);
-    const tasks = useQuery(api.tasks.get);
+    const imageInput = useRef(null);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,13 +23,26 @@ const Form = () => {
             alert("Could not get location");
             return;
         }
-
         const { latitude, longitude } = location;
-        await addEntry({ latitude, longitude, photo, user_name, comment });
-        console.log(latitude, longitude, comment, user_name);
+
+        // Get short-lived upload URL
+        const postURL = await generateUploadUrl();
+        // POST file to the url
+        const result = await fetch(postURL, {
+            method: "POST",
+            headers: { "Content-Type": selectedImage.type },
+            body: selectedImage,
+        });
+        // save result to this ID to save to database
+        const { storageId } = await result.json();
+
+        await addEntry({ latitude, longitude, storageId, user_name, comment });
         setUserName("");
         setComment("");
+        setSelectedImage(null);
+        imageInput.current.value = null;
         alert("Form Submitted");
+        navigate("/");
     };
 
     // Define the function that finds the user's geolocation
@@ -68,8 +83,15 @@ const Form = () => {
                 onChange={(e) => setComment(e.target.value)}
                 required
             />
+            <input
+                type="file"
+                accept="image/*"
+                ref={imageInput}
+                onChange={(e) => setSelectedImage(e.target.files[0])}
+                disabled={selectedImage !== null}
+                required
+            />
             <button type='submit'>Click to submit</button>
-            {tasks && JSON.stringify(tasks)}
         </form>
     );
 

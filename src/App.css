@@ -1,20 +1,17 @@
 h1{
-  color: #cc7d51;
-  background-color: rgba(43,61,91,0.9);
   text-align: center;
   padding-top: 25px;
   font-size: 3.2em;
   line-height: 1.1;
 }
 h3{
-  color: #cc7d51;
-  background-color: rgba(43,61,91,0.8);
   text-align: center;
   padding-bottom: 25px;
   font-size: 1.2em;
   line-height: 1.1;
 }
 header{
+  color: #cc7d51;
   background-color: rgba(43,61,91,1);
 }
 
@@ -33,3 +30,19 @@ body{
   background-color: #e0c0ab;
 }
 
+.form-link{
+  padding: 5px;
+  color: rgba(43,61,91,1);
+}
+
+.map-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+
+  height: 100vh;           
+}
+
+.form {
+  display: flex;
+}
