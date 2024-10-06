@@ -9,7 +9,15 @@
 form {
     width: 400px;
     margin: 0 auto;
-    padding: 20px;
+    margin-bottom: 50px;
+    padding: 50px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.form p {
+    margin: 0;
+    align-self: flex-start;
 }
 
 .form input[type="text"],
@@ -38,7 +46,7 @@ textarea {
     font-size: 16px;
     margin-bottom: 24px;
     color: black;
-
+    align-self: flex-start;
 }
 
 input[type="file"]::file-selector-button {
