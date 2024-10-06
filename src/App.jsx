@@ -30,7 +30,6 @@ function App() {
   return (
 
     <div className="App">
-      <Form></Form>
       <header>
         <h1>DeSharp</h1>
 
@@ -47,20 +46,6 @@ function App() {
           </Route>
         </Routes>
       </Router>
-      
-      <APIProvider apiKey={googleMapsApiKey}>
-        <div style={{ height: "100vh", width: "100%" }}>
-          <Map zoom={9} center={position} mapId={googleMapsId}>
-            <AdvancedMarker position={position} onClick={() => setOpen(true)}>
-              <Pin />
-            </AdvancedMarker>
-            {open && (
-              <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
-                <p>Test</p>
-              </InfoWindow>
-            )}
-          </Map>
-        </div>
 
       <section className="form-link">
         <h2>
@@ -71,7 +56,7 @@ function App() {
 
       <section className="map-container">
         <APIProvider apiKey={googleMapsApiKey}>
-          <div style={{height: "90vh", width: "60%" }}>
+          <div style={{height: "90vh", width: "60%", borderRadius: "32px",overflow: "hidden"}}>
             <Map
               defaultCenter={position}
               defaultZoom={13}
@@ -80,6 +65,25 @@ function App() {
               onMove={evt => setViewState(evt.viewState)}
               onZoomChanged={evt => setViewState(evt.viewState)}
               >
+
+              {tasks ? (
+                tasks.map((task) => (
+                  <AdvancedMarker
+                    key={task._id}
+                    position={{ lat: task.latitude, lng: task.longitude }} // Corrected position
+                    onClick={() => setOpen(task._id)} // Set the currently open marker
+                  >
+                    {open === task._id && (
+                      <InfoWindow onCloseClick={() => setOpen(null)}>
+                        <p>{`Needle reported at (${task.latitude}, ${task.longitude})`}</p>
+                      </InfoWindow>
+                    )}
+                  </AdvancedMarker>
+                ))
+              ) : (
+                <div>Loading tasks...</div>
+              )}
+
               <AdvancedMarker position={position} onClick={() => setOpen(true)}>
               </AdvancedMarker>
               
@@ -95,14 +99,6 @@ function App() {
           </div>
         </APIProvider>
       </section>
-
-
-      {/* Add loading and error states for better UX */}
-      {tasks ? (
-        tasks.map(({ _id, text }) => <div key={_id}>{text}</div>)
-      ) : (
-        <div>Loading tasks...</div>
-      )}
     </div>
 
   );
