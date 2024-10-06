@@ -1,4 +1,5 @@
 import "./App.css";
+import sunset from './assets/sunset.webp'
 import Form from "./components/Form.jsx";
 import PoiMarkers from "./components/PoiMarkers.jsx";
 import Header from "./components/Header.jsx";
@@ -30,12 +31,18 @@ function Home() {
 
       <section className="form-link">
         <div className="intro">
-          <p>Over recent years, Vancouver has experienced a sharp increase in substance abuse,
-          leading to a drug epidemic. Many have found the streets unsafe due to the presence of needles.
-          We have partnered with some company to help clean the streets. There is no one better to help locate these 
-          needles than those that walk on the streets. With your help, we wll be able to restore a clean and safe 
-          environment for our city
-        </p>
+          <div className="introText">
+            <p>Over recent years, Vancouver has experienced a sharp increase in substance abuse,
+            leading to a drug epidemic. Many have found the streets unsafe due to the presence of needles.
+            We have partnered with some company to help clean the streets. There is no one better to help locate these 
+            needles than those that walk on the streets. With your help, we wll be able to restore a clean and safe 
+            environment for our city
+            </p>
+          </div>
+          <div className="img">
+            <img src={sunset} alt="Vancouver Image" />
+          </div>
+
         </div>
         
         <h3>
