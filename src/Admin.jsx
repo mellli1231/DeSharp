@@ -1,15 +1,14 @@
-import "./App.css";
+import "./Admin.css";
 import Form from "./components/Form.jsx";
-import Admin from "./Admin.jsx";
 import PoiMarkers from "./components/PoiMarkers.jsx";
 import Header from "./components/Header.jsx";
 import { useQuery } from "convex/react";
-import { api } from "../convex/_generated/api";
+import { api } from "../convex/_generated/api.js";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 import {BrowserRouter as Router, Routes, Route, Link, Outlet} from "react-router-dom";
 
-function App() {
+function Admin() {
   const locations = useQuery(api.tasks.get);
   console.log(locations);
   const position = { lat: 49.282756, lng: -123.120774 };
@@ -65,14 +64,6 @@ function App() {
       </section>
         <div className="form">                
           <h2>Help us DeSharp the city!</h2>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route path="/form" element={<Form />} />
-                <Route path="/admin" element={<Admin />} />
-              </Route>
-            </Routes>
-          </Router>
         </div>
     </>
   );
@@ -91,4 +82,4 @@ function Layout() {
     </div>
   );
 }
-export default App;
+export default Admin;
