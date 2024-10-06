@@ -7,9 +7,10 @@ import { APIProvider, Map, InfoWindow, Marker } from "@vis.gl/react-google-maps"
 import { useState } from "react";
 
 function Admin() {
-  const [locations, setLocations] = useState(useQuery(api.tasks.get) || []);
-  const position = { lat: 49.282756, lng: -123.120774 };
+  const locations = useQuery(api.tasks.get);
   const [open, setOpen] = useState(false);
+  const [clickedPOI, setClickedPOI] = useState(null);
+
 
   // Access environment variables using import.meta.env
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -22,46 +23,66 @@ function Admin() {
   });
 
   const deleteEntry = useMutation(api.myFunctions.deleteTask);
-  const handleRightClick = async (location) => {
+
+  const handleRightClick = async (locationId) => {
     try {
-        await deleteEntry({ id: location._id });
+      await deleteEntry({ _id: locationId });
+      setOpen(false);
     }
     catch (error) {
-        console.error("Error deleting entry:", error);
+      console.error("Error deleting entry:", error);
     }
   };
 
+    // Handler to update clicked POI data and open InfoWindow
+    const handleMarkerClick = (poi) => {
+      setClickedPOI(poi);  // Set the clicked marker's POI data
+      setOpen(true);  // Open the InfoWindow
+    };
+
   return (
     <>
-      <Header />  
+      <Header />
       <section className="map-container">
         <APIProvider apiKey={googleMapsApiKey}>
           <div style={{ height: "90vh", width: "60%" }}>
             <Map
 
-              defaultCenter={position}
-              defaultZoom={13}
+              defaultCenter={{ lat: 49.242532, lng: -123.007856 }}
+              defaultZoom={6}
               mapId={googleMapsId}
               {...viewState}
               onMove={evt => setViewState(evt.viewState)}
               onZoomChanged={evt => setViewState(evt.viewState)}
             >
-              {locations && locations.map((location) => (
-                <Marker
-                    key={location._id}
-                    onRightClick={handleRightClick.bind(null, location._id)}
-            />
-            ))}
-              <PoiMarkers pois={locations} />
-              
+              <PoiMarkers 
+              pois={locations}
+              onMarkerClick={handleMarkerClick}
+              />
 
-              {open && (
-                <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
-                  <p>Test</p>
+
+              {open && clickedPOI && (
+                <InfoWindow
+                  position={{ lat: clickedPOI.latitude, lng: clickedPOI.longitude }}  // Use the clicked position
+                  onCloseClick={() => setOpen(false)}  // Close the InfoWindow when clicked
+                >
+                  <div>
+                    <p><strong>ID:</strong> {clickedPOI._id}</p>
+                    <p><strong>Submitted by:</strong> {clickedPOI.user_name}</p>
+                    <p><strong>Comment:</strong> {clickedPOI.comment}</p>
+                    <button onClick={() => handleRightClick(clickedPOI._id)}>Delete</button>
+                    {clickedPOI.imageInput && (
+                      <img
+                        src={clickedPOI.imageInput}
+                        alt={`Submitted by ${clickedPOI.user_name}`}
+                        style={{ width: "100px", height: "100px" }}
+                      />
+                    )}
+                  </div>
                 </InfoWindow>
               )}
             </Map>
-              
+
           </div>
         </APIProvider>
       </section>
