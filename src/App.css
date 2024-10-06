@@ -7,11 +7,8 @@ body{
 }
 
 section{
+  padding: 0;
   text-align: center;
-}
-
-.form-link{
-  margin: 50px;
 }
 
 .map-container, .map_admin{
@@ -37,12 +34,31 @@ section{
 }
 
 .intro {
-  background-color: rgba(255, 255, 255, 0.699);
+  display:flex;
+  background-image:url('./assets/sunset.webp');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  width:100%;
+  height:auto
+}
+
+.intro .introText{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.introText p{
+  background-color: rgba(255, 255, 255, 0.733);
   padding: 16px;
   border-radius: 32px;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-bottom: 50px;
+  margin:20px;
+  text-align: center;
+  display: inline-flex;
+  max-width:600px;
 }
 
 #header {
@@ -81,7 +97,6 @@ section{
       1px -1px 0 #000,
       -1px 1px 0 #000,
        1px 1px 0 #000;
- 
 }
 
 #header a:hover {
@@ -95,6 +110,8 @@ section{
 
 h3 {
   font-weight:50;
+  font-size: 32px;
+  margin:50px;
   
 }
 

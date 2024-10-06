@@ -46,9 +46,14 @@ function Admin() {
   return (
     <>
       <Header />
-      <section className="map-admin">
+      <section className="map-admin"
+      style={{display: "flex", justifyContent: "center", alignItems:"center",
+        margin:"50px"
+      }}>
         <APIProvider apiKey={googleMapsApiKey}>
-          <div className="map" style={{ height: "90vh", width: "60%" }}>
+          <div className="map" style={{ height: "90vh", width: "60%",
+  boxShadow: "0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)",
+  marginBottom: "16px"}}>
             <Map
 
               defaultCenter={{ lat: 49.242532, lng: -123.007856 }}

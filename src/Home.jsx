@@ -2,6 +2,7 @@ import "./App.css";
 import PoiMarkers from "./components/PoiMarkers.jsx";
 import Header from "./components/Header.jsx";
 import Form from "./components/Form.jsx";
+import vancouver from "./assets/sunset.webp"
 import { useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { APIProvider, Map, InfoWindow } from "@vis.gl/react-google-maps";
@@ -33,12 +34,14 @@ function Home() {
             <Header />
             <section className="form-link">
                 <div className="intro">
+                  <div className="introText">
                     <p>Over recent years, Vancouver has experienced a sharp increase in substance abuse,
                         leading to a drug epidemic. Many have found the streets unsafe due to the presence of needles.
                         We have partnered with some company to help clean the streets. There is no one better to help locate these
                         needles than those that walk on the streets. With your help, we wll be able to restore a clean and safe
                         environment for our city
                     </p>
+                  </div>
                 </div>
 
                 <h3>
