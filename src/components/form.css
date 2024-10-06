@@ -36,7 +36,7 @@ textarea {
     background-color:#1e5431;
     color: white;
     font-size: 16x;
-    border-radius: 8px;
+    border-radius: 16px;
 }
 
 .form button[type="submit"]:hover {
