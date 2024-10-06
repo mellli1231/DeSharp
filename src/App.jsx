@@ -29,7 +29,7 @@ function App() {
   return (
 
     <div className="App">
-      <Form></Form>
+      {/* <Form></Form> */}
       <header>
         <h1>DeSharp</h1>
         <h3>
@@ -41,7 +41,6 @@ function App() {
       <section className="form-link">
         <h2>
           Find another needle not on this map?{" "}
-
         </h2>
       </section>
 
@@ -64,12 +63,56 @@ function App() {
                 </InfoWindow>
               )}
             </Map>
+              <div className="form">
+              <Router>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    <Route path="/form" element={<Form />} />
+                  </Route>
+                </Routes>
+              </Router>
+                <h2>Help us DeSharp the city!</h2>
+
+                <Form></Form>
+              </div>
           </div>
         </APIProvider>
       </section>
+
+      {/* Add loading and error states for better UX */}
+      {tasks ? (
+        tasks.map(({ _id, text }) => <div key={_id}>{text}</div>)
+      ) : (
+        <div>Loading tasks...</div>
+      )}
+
+      <div className="form">
+        
+        <h2>Help us DeSharp the city!</h2>
+
+        <Form></Form>
+      </div>
     </div>
 
+    
+  );
+};
+
+function Layout() {
+  return (
+    <div>
+      {}
+      <nav>
+        <ul>
+          <li>
+            <Link to="/form">Add a Pin</Link>
+          </li>
+        </ul>
+      </nav>
+      <hr />
+      {}
+      <Outlet />
+    </div>
   );
 }
-
 export default App;
