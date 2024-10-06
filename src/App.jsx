@@ -11,7 +11,6 @@ import {BrowserRouter as Router, Routes, Route, Link, Outlet} from "react-router
 
 function App() {
   const locations = useQuery(api.tasks.get);
-  console.log(locations);
   const position = { lat: 49.282756, lng: -123.120774 };
   const [open, setOpen] = useState(false);
 
@@ -22,7 +21,7 @@ function App() {
   const [viewState, setViewState] = useState({
     longitude: -123,
     latitude: 49,
-    zoom: 13.5
+    zoom: 11
   });
 
   return (
@@ -42,10 +41,10 @@ function App() {
 
       <section className="map-container">
         <APIProvider apiKey={googleMapsApiKey}>
-          <div style={{ height: "90vh", width: "60%" }}>
-            <Map
-              defaultCenter={position}
-              defaultZoom={13}
+          <div className="map">
+            <Map 
+              defaultCenter={{lat:49.242532, lng:-123.007856}}
+              defaultZoom={6}
               mapId={googleMapsId}
               {...viewState}
               onMove={evt => setViewState(evt.viewState)}
@@ -63,8 +62,9 @@ function App() {
           </div>
         </APIProvider>
       </section>
+     
         <div className="form">                
-          <h2>Help us DeSharp the city!</h2>
+          <h3>Help us DeSharp the city!</h3>
           <Router>
             <Routes>
               <Route path="/" element={<Layout />}>

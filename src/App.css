@@ -1,47 +1,29 @@
-h1{
-  text-align: center;
-  padding-top: 25px;
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-h3{
-  text-align: center;
-  padding-bottom: 25px;
-  font-size: 1.2em;
-  line-height: 1.1;
-}
-header{
-  color: #cc7d51;
-  background-color: rgba(43,61,91,1);
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  background-color: #C0C78C;
+  line-height: 1.5;
 }
 
-a:hover{
-  color: #617492;
-}
-a {
-  font-size: larger;
-  color: #15253f;
-}
 section{
   text-align: center;
-  background-color: #Bd9060;
-}
-body{
-  background-color: #e0c0ab;
-  margin: 0;
 }
 
 .form-link{
-  padding: 5px;
-  color: rgba(43,61,91,1);
+  color: rgb(24, 42, 8);
+  margin: 10px;
 }
 
 .map-container {
   display: flex;
   justify-content: center; 
   align-items: center;     
+}
 
-  height: 100vh;           
+.map {
+  height: 60vh;
+  width: 66%;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 .form {
@@ -49,21 +31,28 @@ body{
 }
 
 
+
 #header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  color: #cc7d51;
-  background-color: rgba(43,61,91,1);
+  background-color: #86AB89;
   margin: 0;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  padding: 10px 20px;
+}
+
+#header h2 {
+  color: white;
 }
 
 #header a {
   font-size: larger;
-  color: #15253f;
+  color: white;
 }
 
 #header a:hover {
-  color: #617492;
+  color: gray;
 }
