@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import "./form.css";
 
 const Form = () => {
 
@@ -69,7 +70,8 @@ const Form = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
+          <div className="form">
+          <input
                 type="text"
                 placeholder="Enter your name"
                 onChange={(e) => setUserName(e.target.value)}
@@ -83,6 +85,7 @@ const Form = () => {
                 onChange={(e) => setComment(e.target.value)}
                 required
             />
+<<<<<<< Updated upstream
             <input
                 type="file"
                 accept="image/*"
@@ -93,6 +96,13 @@ const Form = () => {
             />
             <button type='submit'>Click to submit</button>
             {tasks && JSON.stringify(tasks)}
+=======
+
+            <button type='submit'>Click to submit</button>
+           {/* {tasks && JSON.stringify(tasks)} */}
+          </div>
+            
+>>>>>>> Stashed changes
         </form>
     );
 
