@@ -1,3 +1,4 @@
+"use client";
 import "./App.css";
 import Form from "./components/Form.jsx"
 import { useQuery, useMutation } from "convex/react";
@@ -27,10 +28,11 @@ function App() {
   return (
 
     <div className="App">
+      <Form></Form>
       <header>
         <h1>DeSharp</h1>
         <h3>
-          Report any needles you've spotted in Vancouver and We'll send our folks to clean them
+          Report any needles you've spotted in Vancouver and we'll send our folks to clean them
           up!
         </h3>
       </header>

@@ -1,49 +1,55 @@
 import React, { useState } from 'react'
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 const Form = () => {
 
-    const [name, setName] = useState('');
+    const [user_name, setUserName] = useState('');
     const [comment, setComment] = useState('');
     const [userLocation, setUserLocation] = useState(null);
     const [photo, setPhoto] = useState('');
 
     const addEntry = useMutation(api.myFunctions.createTask);
+    const tasks = useQuery(api.tasks.get);
+
     const handleSubmit = async (e) => {
-
         e.preventDefault();
-        [latitude, longitude] = userLocation;
-        await addEntry({ latitude, longitude, photo, name });
 
-        setName("");
+        // Get the user's location before proceeding
+        const location = await getUserLocation();
+        if (!location) {
+            alert("Could not get location");
+            return;
+        }
+
+        const { latitude, longitude } = location;
+        await addEntry({ latitude, longitude, photo, user_name, comment });
+        console.log(latitude, longitude, comment, user_name);
+        setUserName("");
         setComment("");
         alert("Form Submitted");
-    }
+    };
 
-    // define the function that finds the users geolocation
+    // Define the function that finds the user's geolocation
     const getUserLocation = () => {
-      // if geolocation is supported by the users browser
-      if (navigator.geolocation) {
-  
-        // get the current users location
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            // save the geolocation coordinates in two variables
-            const { latitude, longitude } = position.coords;
-            // update the value of userlocation variable
-            setUserLocation({ latitude, longitude });
-          },
-          // if there was an error getting the users location
-          (error) => {
-            console.error('Error getting user location:', error);
-          }
-        );
-      }
-      // if geolocation is not supported by the users browser
-      else {
-        console.error('Geolocation is not supported by this browser.');
-      }
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        setUserLocation({ latitude, longitude });
+                        resolve({ latitude, longitude });
+                    },
+                    (error) => {
+                        console.error('Error getting user location:', error);
+                        reject(null);
+                    }
+                );
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+                reject(null);
+            }
+        });
     };
 
     return (
@@ -51,8 +57,8 @@ const Form = () => {
             <input
                 type="text"
                 placeholder="Enter your name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
+                onChange={(e) => setUserName(e.target.value)}
+                value={user_name}
                 required
             />
 
@@ -63,6 +69,7 @@ const Form = () => {
                 required
             />
             <button type='submit'>Click to submit</button>
+            {tasks && JSON.stringify(tasks)}
         </form>
     );
 
